@@ -8,5 +8,10 @@
     "Davenonymous",
     "RobotGryphon",
     "AlphaMode"
-  ]
+  ],
+  "entrypoints": {
+    "compact_machines_addon": [
+      "dev.compactmods.machines.tunnel.BuiltinTunnels"
+    ]
+  }
 }

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "compactmachines-api",
+  "id": "compactmachines",
   "version": "${version}",
   "name": "Compact Machines 5",
   "description": "It's all so tiny!",

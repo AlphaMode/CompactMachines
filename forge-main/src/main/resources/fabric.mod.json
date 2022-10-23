@@ -25,6 +25,12 @@
     ],
     "jei_mod_plugin": [
       "dev.compactmods.machines.compat.jei.CompactMachinesJeiPlugin"
+    ],
+    "top_plugin": [
+      "dev.compactmods.machines.compat.theoneprobe.TheOneProbeMain"
+    ],
+    "fabric-datagen": [
+      "dev.compactmods.machines.datagen.DataGeneration"
     ]
   },
   "custom": {

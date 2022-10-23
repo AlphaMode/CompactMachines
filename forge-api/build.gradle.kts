@@ -62,10 +62,10 @@ repositories {
 dependencies {
     minecraft("com.mojang:minecraft:${minecraft_version}")
     mappings(loom.officialMojangMappings())
-//    modImplementation("net.fabricmc:fabric-loader:${loader_version}")
-    modCompileOnly("net.fabricmc.fabric-api:fabric-api:${fabric_version}")
-    modCompileOnly("io.github.fabricators_of_create.Porting-Lib:porting-lib:${port_lib_version}+${minecraft_version}")
-    implementation("com.google.code.findbugs:jsr305:3.0.2") {isTransitive}
+    modImplementation("net.fabricmc:fabric-loader:${loader_version}")
+    modImplementation("net.fabricmc.fabric-api:fabric-api:${fabric_version}")
+    modImplementation("io.github.fabricators_of_create.Porting-Lib:porting-lib:${port_lib_version}+${minecraft_version}")
+    implementation("com.google.code.findbugs:jsr305:3.0.2")
     modApi("teamreborn:energy:2.2.0") {
         exclude("net.fabricmc.fabric-api")
     }
@@ -95,7 +95,7 @@ tasks.withType<Jar> {
 
 tasks.jar {
     archiveClassifier.set("api")
-//    finalizedBy("remapJar")
+    finalizedBy("remapJar")
 }
 
 tasks.named<Jar>("sourcesJar") {

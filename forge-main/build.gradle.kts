@@ -53,6 +53,28 @@ sourceSets.test {
     resources.srcDir("src/test/resources")
 }
 
+loom {
+    runs {
+        create("datagen") {
+            client()
+
+            name("Data Generation")
+            vmArg("-Dfabric-api.datagen")
+            vmArg("-Dfabric-api.datagen.output-dir=${file("src/generated/resources")}")
+            vmArg("-Dfabric-api.datagen.modid=compactmachines")
+            // from ae2
+            property("dev.compactmods.machines.datagen.existingData", file("src/main/resources").absolutePath)
+
+            runDir("build/datagen")
+        }
+        create("gametest") {
+            server()
+            name("Game Test")
+            vmArg("-Dfabric-api.gametest.server=true")
+        }
+    }
+}
+
 project.evaluationDependsOn(project(":forge-api").path)
 
 repositories {
@@ -120,11 +142,14 @@ dependencies {
     include("io.github.fabricators_of_create.Porting-Lib:porting-lib:${port_lib_version}+${minecraft_version}")
     modImplementation("com.electronwill.night-config:core:${night_config_version}")
     modImplementation("com.electronwill.night-config:toml:${night_config_version}")
-    modImplementation("net.minecraftforge:forgeconfigapiport-fabric:${config_api_version}")
+    modImplementation("net.minecraftforge:forgeconfigapiport-fabric:${config_api_version}"){isTransitive = false}
     include("com.electronwill.night-config:core:${night_config_version}")
     include("com.electronwill.night-config:toml:${night_config_version}")
     include("net.minecraftforge:forgeconfigapiport-fabric:${config_api_version}")
     modImplementation("io.github.tropheusj:serialization-hooks:0.3.22")
+    modApi("teamreborn:energy:2.2.0") {
+        exclude("net.fabricmc.fabric-api")
+    }
     include("teamreborn:energy:2.2.0") {
         exclude("net.fabricmc.fabric-api")
     }
@@ -139,12 +164,14 @@ dependencies {
     include("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${cca_version}")
     include("dev.onyxstudios.cardinal-components-api:cardinal-components-block:${cca_version}")
 
-    modImplementation("dev.emi:trinkets:${trinkets_version}")
+    modImplementation("dev.emi:trinkets:${trinkets_version}"){isTransitive = false}
 
-    implementation(project(":forge-api"))
+    modImplementation(project(":forge-api")){isTransitive = false}
+    include(project(":forge-api"))
     testImplementation(project(":forge-api"))
 
-    implementation(project(":forge-tunnels"))
+    modImplementation(project(":forge-tunnels")){isTransitive = false}
+    include(project(":forge-tunnels")){isTransitive = false}
     testImplementation(project(":forge-tunnels"))
 
     // JEI

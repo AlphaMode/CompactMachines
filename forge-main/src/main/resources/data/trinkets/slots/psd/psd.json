@@ -1,0 +1,4 @@
+{
+  "icon": "compactmachines:curios/empty_psd",
+  "validator_predicates": ["trinkets:tag"]
+}
