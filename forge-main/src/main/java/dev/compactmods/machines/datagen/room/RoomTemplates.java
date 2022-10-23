@@ -1,0 +1,43 @@
+package dev.compactmods.machines.datagen.room;
+
+import com.mojang.serialization.JsonOps;
+import dev.compactmods.machines.api.core.CMRegistries;
+import dev.compactmods.machines.api.core.Constants;
+import dev.compactmods.machines.api.room.RoomTemplate;
+import dev.compactmods.machines.machine.LegacySizedTemplates;
+import io.github.fabricators_of_create.porting_lib.data.JsonCodecProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.Vec3i;
+import net.minecraft.resources.RegistryOps;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FastColor;
+import net.minecraftforge.common.data.ExistingFileHelper;
+
+import java.util.HashMap;
+
+public class RoomTemplates {
+
+    @SuppressWarnings("removal")
+    public static void make(FabricDataGenerator gen, ExistingFileHelper files) {
+
+        final var templates = new HashMap<ResourceLocation, RoomTemplate>();
+        templates.put(new ResourceLocation(Constants.MOD_ID, "tiny"), LegacySizedTemplates.EMPTY_TINY.template());
+        templates.put(new ResourceLocation(Constants.MOD_ID, "small"), LegacySizedTemplates.EMPTY_SMALL.template());
+        templates.put(new ResourceLocation(Constants.MOD_ID, "normal"), LegacySizedTemplates.EMPTY_NORMAL.template());
+        templates.put(new ResourceLocation(Constants.MOD_ID, "large"), LegacySizedTemplates.EMPTY_LARGE.template());
+        templates.put(new ResourceLocation(Constants.MOD_ID, "giant"), LegacySizedTemplates.EMPTY_GIANT.template());
+        templates.put(new ResourceLocation(Constants.MOD_ID, "colossal"), LegacySizedTemplates.EMPTY_COLOSSAL.template());
+
+        templates.put(new ResourceLocation(Constants.MOD_ID, "absurd"), new RoomTemplate(new Vec3i(25, 25, 25),
+                FastColor.ARGB32.color(255, 0, 166, 88),
+                RoomTemplate.NO_TEMPLATE));
+
+        final var ops = RegistryOps.create(JsonOps.INSTANCE, RegistryAccess.builtinCopy());
+
+        final var provider = JsonCodecProvider.forDatapackRegistry(gen, files,
+                Constants.MOD_ID, ops, CMRegistries.TEMPLATE_REG_KEY, templates);
+
+        gen.addProvider(provider);
+    }
+}

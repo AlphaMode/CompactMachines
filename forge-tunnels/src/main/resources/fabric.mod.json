@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "compactmachines-tunnels",
+  "version": "${version}",
+  "name": "Compact Machines 5",
+  "description": "It's all so tiny!",
+  "authors": [
+    "Davenonymous",
+    "RobotGryphon",
+    "AlphaMode"
+  ]
+}

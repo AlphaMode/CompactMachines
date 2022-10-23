@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "compactmachines",
+  "version": "${version}",
+  "name": "Compact Machines 5",
+  "description": "It's all so tiny!",
+  "authors": [
+    "Davenonymous",
+    "RobotGryphon",
+    "AlphaMode"
+  ],
+  "accessWidener": "compactmachines.accesswidener",
+  "mixins": [
+    "compactmachines.mixins.json"
+  ],
+  "entrypoints": {
+    "main": [
+      "dev.compactmods.machines.CompactMachines"
+    ],
+    "client": [
+      "dev.compactmods.machines.client.ClientEventHandler"
+    ],
+    "cardinal-components-entity": [
+      "dev.compactmods.machines.room.capability.RoomCapEventHandler"
+    ],
+    "jei_mod_plugin": [
+      "dev.compactmods.machines.compat.jei.CompactMachinesJeiPlugin"
+    ]
+  },
+  "custom": {
+    "cardinal-components": [
+      "compactmachines:room_metadata",
+      "compactmachines:room_history"
+    ]
+  }
+}
